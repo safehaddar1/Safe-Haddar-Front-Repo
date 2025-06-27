@@ -1,0 +1,63 @@
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h2 class="text-center mb-0">Liste des Départements</h2>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" class="text-center">ID</th>
+              <th scope="col" class="text-center">Nom du Département</th>
+              <th scope="col" class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of departements">
+              <td class="text-center align-middle">{{ d.idDepart }}</td>
+              <td class="text-center align-middle">
+                <span class="badge badge-pill badge-info p-2">{{ d.nomDepart }}</span>
+              </td>
+              <td class="text-center align-middle">
+               
+                <button class="btn btn-sm btn-outline-danger" (click)="onDelete(d.idDepart)">
+                  <i class="fas fa-trash-alt"></i> Supprimer
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Ajout responsive pour petits écrans -->
+      <div class="d-block d-md-none">
+        <div class="list-group">
+          <div *ngFor="let d of departements" class="list-group-item mb-3 shadow-sm">
+            <div class="d-flex justify-content-between">
+              <h5 class="mb-1 text-primary">{{ d.nomDepart }}</h5>
+              <small class="text-muted">ID: {{ d.idDepart }}</small>
+            </div>
+            <div class="mt-2 d-flex justify-content-end">
+              <button class="btn btn-sm btn-outline-primary mr-2">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <div class="d-flex justify-content-between">
+        <div>Total: {{ departements.length }} départements</div>
+        <button class="btn btn-success" (click)="refreshData()">
+          <i class="fas fa-plus"></i> refresh <img src="frontend-kaddem2/src/app/assets/kaddem_front.JPG" alt="picture" width="400"/>
+
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

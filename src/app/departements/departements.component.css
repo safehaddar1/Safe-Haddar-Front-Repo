@@ -1,0 +1,28 @@
+/* Animation sur les lignes du tableau */
+.table-hover tbody tr {
+  transition: all 0.3s ease;
+}
+
+.table-hover tbody tr:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Style des badges */
+.badge-info {
+  background-color: #17a2b8;
+  font-size: 0.9rem;
+  min-width: 120px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .card {
+    border: none;
+    box-shadow: none;
+  }
+  
+  .list-group-item {
+    border-radius: 10px;
+  }
+}
