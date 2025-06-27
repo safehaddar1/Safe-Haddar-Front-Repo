@@ -10,7 +10,9 @@ pipeline {
         // Tools
         SONAR_SCANNER_HOME = tool 'sonar-scanner'
     }
-    
+     tools {
+        nodejs 'NodeJS' // Name of the NodeJS installation configured in Jenkins global tools
+    }
     
     stages {
         stage('Checkout') {
