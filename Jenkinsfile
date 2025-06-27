@@ -43,7 +43,7 @@ pipeline {
             steps {
                 withSonarQubeEnv("${SONARQUBE}") {
                     sh """
-                        ${env.SONAR_SCANNER} \
+                         sonar-scanner/bin/sonar-scanner \
                         -Dsonar.projectKey=frontend-kaddem \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://localhost:9000 \
