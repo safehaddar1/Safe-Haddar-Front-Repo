@@ -92,19 +92,19 @@ pipeline {
         }
     }
     
-    post {
-        always {
-            cleanWs()
-        }
-        failure {
-            emailext body: "Build ${currentBuild.fullDisplayName} failed.\n\nCheck console output at ${env.BUILD_URL}",
-                    subject: "FAILED: ${currentBuild.fullDisplayName}",
-                    to: 'professor@email.com'
-        }
-        success {
-            emailext body: "Build ${currentBuild.fullDisplayName} succeeded!\n\nDetails: ${env.BUILD_URL}",
-                    subject: "SUCCESS: ${currentBuild.fullDisplayName}",
-                    to: 'professor@email.com'
-        }
-    }
+    // post {
+    //     always {
+    //         cleanWs()
+    //     }
+    //     failure {
+    //         emailext body: "Build ${currentBuild.fullDisplayName} failed.\n\nCheck console output at ${env.BUILD_URL}",
+    //                 subject: "FAILED: ${currentBuild.fullDisplayName}",
+    //                 to: 'professor@email.com'
+    //     }
+    //     success {
+    //         emailext body: "Build ${currentBuild.fullDisplayName} succeeded!\n\nDetails: ${env.BUILD_URL}",
+    //                 subject: "SUCCESS: ${currentBuild.fullDisplayName}",
+    //                 to: 'professor@email.com'
+    //     }
+    // }
 }
