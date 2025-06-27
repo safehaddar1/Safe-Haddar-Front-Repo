@@ -11,6 +11,7 @@ pipeline {
     }
      tools {
         nodejs 'NodeJS' // Name of the NodeJS installation configured in Jenkins global tools
+        sonarQubeScanner 'sonar-scanner' 
     }
     
     stages {
@@ -35,7 +36,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'npm run build -- --configuration production'
+                sh 'ng build frontend-kaddem2 --configuration production --no-progress --source-map=false'
             }
         }
         
@@ -43,7 +44,7 @@ pipeline {
             steps {
                 withSonarQubeEnv("${SONARQUBE}") {
                     sh """
-                         sonar-scanner/bin/sonar-scanner \
+                        sonar-scanner \
                         -Dsonar.projectKey=frontend-kaddem \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://localhost:9000 \
