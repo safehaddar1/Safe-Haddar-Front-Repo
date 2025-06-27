@@ -48,22 +48,13 @@ pipeline {
                 echo "🧪 Running SonarQube analysis..."
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                        echo "📥 Installing SonarScanner CLI..."
-                        npm install --no-save sonar-scanner
                         echo "🚀 Launching SonarScanner..."
                         npx sonar-scanner
                     '''
                 }
             }
         } 
-        stage('🔍 SonarQube Analysis') {
-    steps {
-        echo "🧪 Running SonarQube analysis..."
-        withSonarQubeEnv('SonarQube') {
-            sh 'sonar-scanner'
-        }
-    }
-}
+        
         
 
         stage('📚 Archive Frontend Build') {
