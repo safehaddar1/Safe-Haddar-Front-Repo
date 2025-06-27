@@ -11,7 +11,6 @@ pipeline {
     }
      tools {
         nodejs 'NodeJS' // Name of the NodeJS installation configured in Jenkins global tools
-        sonarQubeScanner 'sonar-scanner' 
     }
     
     stages {
