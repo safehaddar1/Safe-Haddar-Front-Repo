@@ -55,7 +55,16 @@ pipeline {
                     '''
                 }
             }
+        } 
+        stage('🔍 SonarQube Analysis') {
+    steps {
+        echo "🧪 Running SonarQube analysis..."
+        withSonarQubeEnv('SonarQube') {
+            sh 'sonar-scanner'
         }
+    }
+}
+        
 
         stage('📚 Archive Frontend Build') {
             steps {
