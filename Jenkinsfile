@@ -49,8 +49,6 @@ pipeline {
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.login=squ_711a3b0092ba7d67e2694190b30073d207e9a582 \
-                        -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
-                        -Dsonar.testExecutionReportPaths=test-report.xml
                     """
                 }
             }
