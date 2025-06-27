@@ -35,7 +35,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'ng build frontend-kaddem2 --configuration production --no-progress --source-map=false'
+                sh 'npm run build -- --configuration production'
             }
         }
         
