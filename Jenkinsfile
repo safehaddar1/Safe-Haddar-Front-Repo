@@ -1,16 +1,14 @@
 pipeline {
     agent any
     
-    environment {
-        SONARQUBE = 'SonarQube'               // Jenkins SonarQube server name
-        DOCKER_IMAGE = 'front:latest'         // Docker image tag to build and push
-        NEXUS_REGISTRY = 'localhost:5000'    // Nexus Docker registry URL
-        NEXUS_CREDENTIALS_ID = 'nexus-creds' // Jenkins credentials ID for Nexus login (username/password)
-        
-        
-    }
-     tools {
-        nodejs 'NodeJS' // Name of the NodeJS installation configured in Jenkins global tools
+     environment {
+        DOCKER_IMAGE_NAME = 'front'
+        DOCKER_IMAGE_TAG = 'latest'
+        DOCKER_REGISTRY = 'localhost:5000'
+        FULL_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+        NEXUS_CREDENTIALS_ID = 'nexus-creds'
+        NEXUS_URL = 'http://nexusmain:8081'
+        NEXUS_REPO = 'frontend-builds'
     }
     
     stages {
@@ -23,7 +21,6 @@ pipeline {
         stage('Clean') {
             steps {
                 sh 'rm -rf dist || true'
-                sh 'rm -rf node_modules || true'
             }
         }
         
@@ -39,19 +36,20 @@ pipeline {
             }
         }
         
-        stage('SonarQube Analysis') {
+       stage('🔍 SonarQube Analysis') {
             steps {
-                withSonarQubeEnv("${SONARQUBE}") {
-                    sh """
-                        sonar-scanner \
-                        -Dsonar.projectKey=frontend-kaddem \
-                        -Dsonar.sources=src \
-                        -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=squ_711a3b0092ba7d67e2694190b30073d207e9a582 \
-                    """
+                echo "🧪 Running SonarQube analysis..."
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        echo "📥 Installing SonarScanner CLI..."
+                        npm install --no-save sonar-scanner
+                        echo "🚀 Launching SonarScanner..."
+                        npx sonar-scanner
+                    '''
                 }
             }
         }
+        
         stage('Deploy to Nexus') {
             steps {
                 sh 'zip -r frontend-dist.zip dist/'
