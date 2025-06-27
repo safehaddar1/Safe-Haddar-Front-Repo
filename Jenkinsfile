@@ -20,7 +20,6 @@ pipeline {
         stage('Clean') {
             steps {
                 sh 'rm -rf dist || true'
-                sh 'rm -rf node_modules || true'
             }
         }
         
