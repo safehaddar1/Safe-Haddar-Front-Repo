@@ -1,14 +1,11 @@
 pipeline {
     agent any
     
-     environment {
-        DOCKER_IMAGE_NAME = 'front'
-        DOCKER_IMAGE_TAG = 'latest'
-        DOCKER_REGISTRY = 'localhost:5000'
-        FULL_IMAGE = "${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-        NEXUS_CREDENTIALS_ID = 'nexus-creds'
-        NEXUS_URL = 'http://nexusmain:8081'
-        NEXUS_REPO = 'frontend-builds'
+    environment {
+        SONARQUBE = 'SonarQube'               // Jenkins SonarQube server name
+        DOCKER_IMAGE = 'front:latest'         // Docker image tag to build and push
+        NEXUS_REGISTRY = 'localhost:5000'    // Nexus Docker registry URL
+        NEXUS_CREDENTIALS_ID = 'nexus-creds' // Jenkins credentials ID for Nexus login (username/password)
     }
     
     stages {
