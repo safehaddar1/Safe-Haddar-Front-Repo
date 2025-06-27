@@ -40,15 +40,18 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("${SONARQUBE}") {
-                    sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                    sh """
+                        ${env.SONAR_SCANNER} \
                         -Dsonar.projectKey=frontend-kaddem \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=${env.sonar-tokenn}"
+                        -Dsonar.login=${env.SONAR_AUTH_TOKEN} \
+                        -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
+                        -Dsonar.testExecutionReportPaths=test-report.xml
+                    """
                 }
             }
         }
-        
         stage('Deploy to Nexus') {
             steps {
                 sh 'zip -r frontend-dist.zip dist/'
