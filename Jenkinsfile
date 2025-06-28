@@ -33,11 +33,14 @@ pipeline {
             steps {
                 echo "📦 Installing npm dependencies..."
                 sh 'npm install --force'
+                stash name: 'node_modules', includes: 'node_modules/**'
+
             }
         }
 
         stage('🛠️ Build Angular App') {
             steps {
+                unstash 'node_modules'
                 echo "🔧 Building the Angular application..."
                 sh 'npm run build -- --configuration production'
             }
